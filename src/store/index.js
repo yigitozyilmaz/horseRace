@@ -33,7 +33,11 @@ const store = createStore({
         },
         updateProgress(state) {
             state.schedule[state.currentRound].participants.forEach((horse) => {
-                horse.progress += Math.floor(Math.random() * 10) + 1;
+                // Kondisyon faktörünü kullanarak ilerleme hızını belirliyoruz
+                const conditionFactor = horse.condition / 100; // 0 ile 1 arasında bir oran
+                const progressIncrement = (Math.random() * 10 + 1) * conditionFactor;
+
+                horse.progress += progressIncrement;
 
                 if (horse.progress > state.schedule[state.currentRound].distance) {
                     horse.progress = state.schedule[state.currentRound].distance;
