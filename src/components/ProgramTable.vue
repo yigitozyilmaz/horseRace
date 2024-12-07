@@ -1,11 +1,9 @@
 <template>
-  <div class="program-table">
-    <h3>{{ title }}</h3>
-    <DataTable :value="data" :stripedRows="true" responsiveLayout="scroll">
-      <Column field="position" header="Position"></Column>
-      <Column field="name" header="Name"></Column>
-    </DataTable>
-  </div>
+  <h3 class="table-top">{{ title }}</h3>
+  <DataTable :value="data" :stripedRows="true" responsiveLayout="scroll">
+    <Column field="position" header="Position"></Column>
+    <Column field="name" header="Name"></Column>
+  </DataTable>
 </template>
 
 <script>
@@ -23,8 +21,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.program-table {
-  margin-bottom: 20px;
-}
-</style>
+<style scoped></style>

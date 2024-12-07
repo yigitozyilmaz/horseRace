@@ -8,6 +8,7 @@ import 'primeicons/primeicons.css';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 
+
 const app = createApp(App);
 app.use(store);
 app.use(PrimeVue);

@@ -1,0 +1,54 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.table-top {
+  font-size: 16px;
+  background: #e1735a;
+  text-align: center;
+  margin: 0;
+}
+.p-datatable .p-datatable-tbody tr td {
+  padding: 0.2rem !important;
+  text-align: center !important;
+}
+#app {
+  background: #d2d2d2;
+}
+.p-datatable .p-datatable-thead > tr > th {
+  padding: 0rem 1rem !important;
+  background: #e1e1e1;
+  font-weight: 700;
+  color: black;
+}
+.header-results {
+  background: #a0cd78;
+  text-align: center;
+  padding: 10px 0 10px 0;
+  border: 1px solid black;
+  margin: 0px;
+  position: sticky;
+  top: 0; /* Başlıkların sabit kalması için */
+  z-index: 999;
+}
+.header-program {
+  background: #5087eb;
+  text-align: center;
+  padding: 10px 0 10px 0;
+  border: 1px solid black;
+  margin: 0px;
+  position: sticky;
+  top: 0; /* Başlıkların sabit kalması için */
+  z-index: 999;
+}
+.overflow-y {
+  overflow-y: auto;
+}
+
+.program-table,
+.results-table {
+  max-height: 860px; /* Yükseklik sınırı belirleyin */
+  overflow-y: auto; /* Yatay kaydırma yerine dikey kaydırma */
+}

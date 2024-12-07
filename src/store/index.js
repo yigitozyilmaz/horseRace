@@ -10,38 +10,31 @@ const store = createStore({
             Array(10).fill({ position: "---", name: "---" })
         ),
         currentRound: 0,
-        isPaused: true, // Start/Pause durumu
+        isPaused: true,
     },
     mutations: {
         togglePause(state) {
             state.isPaused = !state.isPaused;
-            console.log("Pause toggled. isPaused:", state.isPaused);
         },
         setHorses(state, horses) {
             state.horses = horses;
         },
         setSchedule(state, schedule) {
             state.schedule = schedule;
-            state.currentRound = 0; // Her program oluşturulduğunda round sıfırlanır
+            state.currentRound = 0;
         },
         updateResults(state, { round, participants }) {
-            // Kazananları belirtilen tura göre sonuç tablosuna ekler
-            console.log(`Updating results for round ${round}...`);
             state.results[round - 1] = participants;
         },
         incrementRound(state) {
             if (state.currentRound < state.schedule.length - 1) {
                 state.currentRound++;
-            } else {
-                console.warn("Tüm roundlar tamamlandı.");
             }
         },
         updateProgress(state) {
             state.schedule[state.currentRound].participants.forEach((horse) => {
-                // İlerlemeyi rastgele bir hızda artırıyoruz
                 horse.progress += Math.floor(Math.random() * 10) + 1;
 
-                // Yarışın mesafesini aşarsa durdur
                 if (horse.progress > state.schedule[state.currentRound].distance) {
                     horse.progress = state.schedule[state.currentRound].distance;
                 }

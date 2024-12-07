@@ -5,7 +5,8 @@
       :key="horse.id"
       class="horse-row"
     >
-      <span class="horse-name">{{ horse.name }}</span>
+      <!-- Burada sadece sıra numarasını gösteriyoruz -->
+      <span class="horse-name">{{ index + 1 }}</span>
       <div class="progress-container">
         <img
           :src="horseIcon"
@@ -16,11 +17,14 @@
           }"
           alt="Horse Icon"
         />
-
-        <div class="finish-line">FINISH</div>
+        <div class="finish-line"></div>
       </div>
     </div>
-    <h2>{{ currentRoundInfo }}</h2>
+
+    <div class="table-bottom">
+      <h2>{{ currentRoundInfo }}</h2>
+      <h2>FINISH</h2>
+    </div>
   </div>
 </template>
 
@@ -196,11 +200,15 @@ export default {
 </script>
 
 <style scoped>
+.table-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: red;
+}
 .race-track {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  background: #eaeaea;
   padding: 20px;
   border-radius: 10px;
   width: 100%;
@@ -208,12 +216,24 @@ export default {
 .horse-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+
   position: relative;
 }
 .horse-name {
-  font-weight: bold;
-  width: 80px;
+  writing-mode: vertical-lr; /* Sayıyı dikey hale getirir */
+  text-align: center; /* Ortalar */
+  background-color: #4caf50; /* Yeşil arka plan */
+  color: white; /* Beyaz yazı rengi */
+  font-weight: bold; /* Kalın yazı */
+  font-size: 1.2rem; /* Yazı boyutu */
+  padding: 0; /* İç boşluk yok */
+  margin: 0; /* Dış boşluk yok */
+  display: flex;
+  align-items: center; /* Dikey ortalama */
+  justify-content: center; /* Yatay ortalama */
+  width: 40px; /* Sabit genişlik */
+  border: 1px solid black; /* Çerçeve */
+  height: 50px;
 }
 .progress-container {
   position: relative;
@@ -221,7 +241,6 @@ export default {
   height: 50px;
   background: #f0f0f0;
   border: 1px solid #ccc;
-  border-radius: 10px;
   overflow: hidden;
 }
 .horse-icon {

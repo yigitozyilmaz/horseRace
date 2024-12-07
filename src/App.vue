@@ -3,15 +3,11 @@
     <NavBar />
     <div class="main-content">
       <div class="flex">
-        <!-- Horse List -->
         <HorseList />
-        <!-- Race Track -->
         <RaceTrack />
-        <!-- Program ve Results -->
-        <div class="flex">
-          <!-- Program -->
-          <div>
-            <h2>Program</h2>
+        <div class="flex table-container">
+          <div class="program-table">
+            <h2 class="header-program">Program</h2>
             <ProgramTable
               v-for="(round, index) in program"
               :key="index"
@@ -19,9 +15,9 @@
               :title="`${round.round}st Lap - ${round.distance}m`"
             />
           </div>
-          <!-- Results -->
-          <div>
-            <h2>Results</h2>
+
+          <div class="results-table">
+            <h2 class="header-results">Results</h2>
             <ResultsTable
               v-for="(round, index) in formattedResults"
               :key="index"
@@ -42,7 +38,7 @@ import RaceTrack from "./components/RaceTrack.vue";
 import ProgramTable from "./components/ProgramTable.vue";
 import ResultsTable from "./components/ResultsTable.vue";
 import { mapGetters } from "vuex";
-
+import "./app.css";
 export default {
   components: {
     NavBar,
@@ -58,12 +54,13 @@ export default {
         ? this.schedule.map((round, index) => ({
             round: index + 1,
             distance: round.distance || 0,
-            participants: Array.isArray(round.participants) // `participants` kontrolü
-              ? round.participants.map((participant, i) => ({
-                  position: i + 1,
-                  name: participant.name || "---",
-                }))
-              : [],
+            participants:
+              Array.isArray(round.participants) && round.participants.length > 0
+                ? round.participants.map((participant, i) => ({
+                    position: i + 1,
+                    name: participant.name || "---",
+                  }))
+                : Array(10).fill({ position: "---", name: "---" }), // Varsayılan 10 boş katılımcı
           }))
         : [];
     },
@@ -81,9 +78,5 @@ export default {
 <style scoped>
 .flex {
   display: flex;
-  gap: 20px;
-}
-.results-round {
-  margin-bottom: 20px;
 }
 </style>

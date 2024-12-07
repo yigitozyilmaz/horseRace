@@ -1,6 +1,8 @@
 <template>
   <div class="horse-list">
-    <h2>Horse List (1-20)</h2>
+    <div class="horse-header">
+      <h2 class="text-xl font-bold text-gray-800 mb-4">Horse List (1-20)</h2>
+    </div>
     <DataTable :value="horses" :rows="20" responsiveLayout="scroll">
       <Column field="name" header="Name"></Column>
       <Column field="condition" header="Condition"></Column>
@@ -26,19 +28,16 @@ export default {
   computed: {
     ...mapGetters(["horses"]),
   },
-  methods: {
-    colorTemplate(rowData) {
-      return `<div style="width: 100%; height: 20px; background-color: ${rowData.color};"></div>`;
-    },
-  },
 };
 </script>
 
 <style scoped>
 .horse-list {
-  margin: 20px;
 }
-.color-column {
+
+.horse-header {
+  background: yellow;
+  border: 1px solid black;
   text-align: center;
 }
 </style>

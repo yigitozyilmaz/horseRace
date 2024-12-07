@@ -1,11 +1,9 @@
 <template>
-  <div class="results-table">
-    <h3>{{ title }}</h3>
-    <DataTable :value="data" :stripedRows="true" responsiveLayout="scroll">
-      <Column field="position" header="Position"></Column>
-      <Column field="name" header="Name"></Column>
-    </DataTable>
-  </div>
+  <h3 class="table-top">{{ title }}</h3>
+  <DataTable :value="data" :stripedRows="true" responsiveLayout="scroll">
+    <Column field="position" header="Position"></Column>
+    <Column field="name" header="Name"></Column>
+  </DataTable>
 </template>
 
 <script>
@@ -23,11 +21,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.results-table {
-  margin-bottom: 20px;
-}
-.font-size-10 {
-  font-size: 10px;
-}
-</style>
+<style scoped></style>
