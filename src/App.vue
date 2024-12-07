@@ -54,11 +54,11 @@ export default {
   computed: {
     ...mapGetters(["schedule", "results"]),
     program() {
-      return this.schedule
+      return Array.isArray(this.schedule) // `schedule` kontrolü
         ? this.schedule.map((round, index) => ({
             round: index + 1,
             distance: round.distance || 0,
-            participants: round.participants
+            participants: Array.isArray(round.participants) // `participants` kontrolü
               ? round.participants.map((participant, i) => ({
                   position: i + 1,
                   name: participant.name || "---",
@@ -68,14 +68,11 @@ export default {
         : [];
     },
     formattedResults() {
-      return this.results
-        ? this.results.map((roundResults, index) => ({
-            round: index + 1,
-            distance: this.schedule[index]?.distance || 0,
-            participants:
-              roundResults || Array(10).fill({ position: "---", name: "---" }),
-          }))
-        : [];
+      return this.results.map((roundResults, index) => ({
+        round: index + 1,
+        distance: this.schedule[index]?.distance || 0,
+        participants: roundResults.sort((a, b) => a.progress < b.progress),
+      }));
     },
   },
 };

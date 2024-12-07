@@ -13,11 +13,11 @@ export default {
   props: {
     data: {
       type: Array,
-      required: true,
+      default: () => [],
     },
     title: {
       type: String,
-      required: true,
+      default: "",
     },
   },
 };

@@ -3,7 +3,9 @@ import { createStore } from 'vuex';
 const store = createStore({
     state: {
         horses: [],
-        schedule: [],
+        schedule: Array(6).fill(null).map(() =>
+            Array(10).fill({ position: "---", name: "---" })
+        ),
         results: Array(6).fill(null).map(() =>
             Array(10).fill({ position: "---", name: "---" })
         ),
@@ -13,24 +15,19 @@ const store = createStore({
     mutations: {
         togglePause(state) {
             state.isPaused = !state.isPaused;
-        },
-        updateResult(state, { round, position, name }) {
-            state.results[round - 1][position - 1] = name;
+            console.log("Pause toggled. isPaused:", state.isPaused);
         },
         setHorses(state, horses) {
             state.horses = horses;
-            state.schedule = [];
-            state.results = Array(6).fill(null).map(() => Array(10).fill("---"));
-            state.currentRound = 0; // Yarış sıfırlanır
         },
         setSchedule(state, schedule) {
             state.schedule = schedule;
             state.currentRound = 0; // Her program oluşturulduğunda round sıfırlanır
         },
-        updateResult(state, { round, position, name }) {
-            if (state.results[round - 1]) {
-                state.results[round - 1][position - 1] = name;
-            }
+        updateResults(state, { round, participants }) {
+            // Kazananları belirtilen tura göre sonuç tablosuna ekler
+            console.log(`Updating results for round ${round}...`);
+            state.results[round - 1] = participants;
         },
         incrementRound(state) {
             if (state.currentRound < state.schedule.length - 1) {
@@ -38,6 +35,17 @@ const store = createStore({
             } else {
                 console.warn("Tüm roundlar tamamlandı.");
             }
+        },
+        updateProgress(state) {
+            state.schedule[state.currentRound].participants.forEach((horse) => {
+                // İlerlemeyi rastgele bir hızda artırıyoruz
+                horse.progress += Math.floor(Math.random() * 10) + 1;
+
+                // Yarışın mesafesini aşarsa durdur
+                if (horse.progress > state.schedule[state.currentRound].distance) {
+                    horse.progress = state.schedule[state.currentRound].distance;
+                }
+            });
         },
         resetGame(state) {
             state.horses = [];
@@ -52,11 +60,11 @@ const store = createStore({
             const horses = Array.from({ length: 20 }, (_, i) => ({
                 id: i + 1,
                 name: `Horse ${i + 1}`,
-                color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
-                condition: Math.floor(Math.random() * 100) + 1,
-                progress: 0, // Varsayılan değer
+                condition: Math.floor(Math.random() * 100),
+                progress: 0,
+                color: `hsl(${Math.random() * 360}, 70%, 50%)`,
             }));
-            commit('setHorses', horses);
+            commit("setHorses", horses);
         },
         generateSchedule({ commit, state }) {
             const distances = [1200, 1400, 1600, 1800, 2000, 2200];

@@ -13,11 +13,11 @@ export default {
   props: {
     data: {
       type: Array,
-      required: true,
+      default: () => [],
     },
     title: {
       type: String,
-      required: true,
+      default: "",
     },
   },
 };
@@ -26,5 +26,8 @@ export default {
 <style scoped>
 .results-table {
   margin-bottom: 20px;
+}
+.font-size-10 {
+  font-size: 10px;
 }
 </style>

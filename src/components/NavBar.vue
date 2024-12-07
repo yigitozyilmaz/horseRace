@@ -13,11 +13,15 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   computed: {
     ...mapGetters(["isPaused"]),
+    buttonLabel() {
+      return this.isPaused ? "Start" : "Pause"; // Duruma göre düğme metni
+    },
   },
   methods: {
     ...mapActions(["generateHorses", "generateSchedule"]),
     ...mapMutations(["togglePause", "resetGame"]),
     toggleRace() {
+      console.log("Toggle race button clicked.");
       this.togglePause();
     },
   },
