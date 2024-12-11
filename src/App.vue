@@ -18,7 +18,7 @@
 
           <div class="results-table">
             <h2 class="header-results">Results</h2>
-            <ResultsTable
+            <ProgramTable
               v-for="(round, index) in formattedResults"
               :key="index"
               :data="round.participants"
@@ -36,7 +36,6 @@ import NavBar from "./components/NavBar.vue";
 import HorseList from "./components/HorseList.vue";
 import RaceTrack from "./components/RaceTrack.vue";
 import ProgramTable from "./components/ProgramTable.vue";
-import ResultsTable from "./components/ResultsTable.vue";
 import { mapGetters } from "vuex";
 import "./app.css";
 export default {
@@ -45,7 +44,6 @@ export default {
     HorseList,
     RaceTrack,
     ProgramTable,
-    ResultsTable,
   },
   computed: {
     ...mapGetters(["schedule", "results"]),
