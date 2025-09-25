@@ -37,7 +37,7 @@ import HorseList from "./components/HorseList.vue";
 import RaceTrack from "./components/RaceTrack.vue";
 import ProgramTable from "./components/ProgramTable.vue";
 import { mapGetters } from "vuex";
-import "app.css";
+import "./App.css";
 export default {
   components: {
     NavBar,
